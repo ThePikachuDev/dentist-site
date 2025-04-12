@@ -6,7 +6,7 @@
     class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-full px-8 py-3 w-[90%] max-w-6xl flex items-center justify-between z-50"
 >
     <a href="/" class="items-center space-x-2">
-        <img src="/favicon.jpg" alt="Logo" class="h-10 w-10 rounded-full" />
+        <img src="/favicon.webp" alt="Logo" class="h-10 w-10 rounded-full" />
     </a>
 
     <div
@@ -46,7 +46,7 @@
             </a>
             <ul
                 data-elem
-                class="serviceDropDown h-0 w-0 overflow-hidden rounded text-xl font-light py-3 text-center text-wrap bg-white px-2"
+                class="serviceDropDown h-0 w-0 overflow-hidden rounded text-xl font-bold py-3 text-center text-wrap bg-white px-2"
             >
                 <li class="py-2">
                     <a href="#">Cosmetic Dentist</a>
@@ -68,7 +68,7 @@
 
     <!-- Desktop Navbar  -->
 
-    <ul class="hidden sm:flex space-x-6 text-gray-700 font-medium">
+    <ul class="hidden sm:flex space-x-6 text-gray-700 font-bold">
         <li>
             <a href="#" class="">Home</a>
         </li>
@@ -101,6 +101,13 @@
 </nav>
 
 <style>
+    nav {
+        font-family: "Syncopate";
+        font-weight: 800;
+
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.1); /* light frosted effect */
+    }
     .activeMenu .line {
         background-color: rgb(191, 183, 183);
     }
