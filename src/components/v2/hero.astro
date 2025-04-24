@@ -1,0 +1,228 @@
+---
+
+---
+
+
+<div
+    class="w-screen h-screen overflow-x-hidden pt-6 gap-9 flex flex-col items-center justify-center"
+>
+    <div
+        class="absolute w-screen h-screen overflow-hidden top-0 right-0 z-[-10]"
+    >
+        <img
+            class="background-icons absolute w-36 h-36 opacity-50 rotate-12 bottom-40 left-30"
+            src="/stethoscope-solid.svg"
+            alt=""
+        />
+        <img
+            class="background-icons  hidden md:block absolute w-36 h-36 opacity-50 rotate-6 bottom-20 right-50"
+            src="/user-doctor-solid.svg"
+            alt=""
+        />
+        <img
+            class="background-icons absolute w-36 h-36 opacity-50 rotate-12 top-10 right-10"
+            src="/syringe-solid.svg"
+            alt=""
+        />
+    </div>
+    <div
+        class="text-[clamp(1.2rem,4.2vw,5rem)]  flex flex-col items-center tracking-wide leading-20 w-[90vw] font-extrabold text-center mx-9"
+    >
+        <div class="animated-text text-nowrap text-center split-text">
+            <h1>Your smile, our passion,</h1>
+        </div>
+
+        <div class="animated-text text-nowrap text-center split-text">
+            <h1 class="">experience dentistry like</h1>
+        </div>
+        <div class="animated-text split-text text-nowrap">
+            <h1>never before!</h1>
+        </div>
+    </div>
+    <button
+        id="animated-btn"
+        type="submit"
+        class="border-2 w-fit h-fit relative flex gap-3 overflow-hidden cursor-pointer rounded-xl px-5 py-4"
+    >
+        <div
+            id="btn-cover"
+            class="w-full h-full z-[-1] absolute top-0 -left-100 bg-black"
+        >
+        </div>
+        <span>Book Appointment</span>
+        <img src="/arrow-up-solid.svg" class="w-6 h-6 rotate-45" alt="" />
+    </button>
+</div>
+
+<script>
+    import gsap from "gsap";
+
+    let allHeadingElem = document.querySelectorAll(".animated-text h1");
+
+    allHeadingElem.forEach((e) => splitElem(e));
+
+    function splitElem(headingElem) {
+        let clutter = "";
+
+        headingElem?.textContent?.split("").forEach((headerChar, index) => {
+            clutter += `<span class="inline-block">${headerChar === " " ? "&nbsp;" : headerChar}</span>`;
+        });
+
+        headingElem.innerHTML = clutter;
+    }
+    //
+    // gsap.from(".background-icons", {
+    //     x: 40,
+    //     y: 30,
+    //     opacity: 0,
+    //     stagger: 0.2,
+    //     duration: 0.8,
+    // });
+
+    // Entrance animation when page loads
+    gsap.from(".background-icons", {
+        x: 40,
+        y: 30,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power2.out",
+    });
+
+    // Floating animation (infinite loop)
+    gsap.to(".background-icons", {
+        y: "+=10",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        duration: 2,
+        stagger: {
+            each: 0.3,
+            yoyo: true,
+        },
+    });
+    //
+    // gsap.from("#animated-btn", {
+    //     opacity: 0,
+    //     ease: "back.out",
+    //
+    //     duration: 2,
+    // });
+    //
+    //
+    // Fade in when the page loads
+    gsap.from(
+        "button, #animated-btn div, #animated-btn span , #animated-btn img",
+        {
+            opacity: 0,
+            ease: "back.out(1.7)",
+            duration: 2,
+        },
+    );
+
+    gsap.to("#animated-btn", {
+        boxShadow: "0 0 8px 2px rgba(0, 0, 0, 0.3)",
+        repeat: -1,
+        yoyo: true,
+        duration: 1.8,
+        ease: "sine.inOut",
+    });
+
+    gsap.from(".animated-text h1 span", {
+        yPercent: 130,
+        ease: "back.out",
+        duration: 0.8,
+        opacity: 0,
+        stagger: 0.02,
+    });
+
+    // gsap.to(".animated-text h1", {
+    //     y: 0,
+    //     duration: 0.5,
+    //     ease: "poower3",
+    // });
+</script>
+
+<style>
+    /* *::selection { */
+    /*     background-color: black; */
+    /*     color: white; */
+    /* } */
+
+    .animated-text {
+        width: fit-content;
+        overflow: hidden;
+        font-family: "Syncopate", sans-serif;
+        font-weight: 900;
+        font-style: normal;
+    }
+    /**/
+    /* .animated-text h1 { */
+    /*     transform: translateY(100%); */
+    /* } */
+    /**/
+
+    #animated-btn {
+        transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+
+        font-family: "Syncopate", sans-serif;
+    }
+
+    #animated-btn:hover {
+        z-index: 99;
+        color: white;
+    }
+
+    #btn-cover {
+        transition: all 1s ease;
+    }
+    #animated-btn:hover #btn-cover {
+        left: 0;
+        transition: all 0.5s ease;
+    }
+    #animated-btn:hover img {
+        z-index: 99;
+        transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+        rotate: 90deg;
+        filter: invert(1);
+    }
+    body {
+        overflow-x: hidden;
+        font-family: "Syncopate", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        background-color: white;
+        /* background: linear-gradient( */
+        /*     to right, */
+        /*     #eaeaea 0%, */
+        /*     #f5f5f5 25%, */
+        /*     #ffffff 50%, */
+        /*     #f5f5f5 75%, */
+        /*     #eaeaea 100% */
+        /* ); */
+        color: #222; /* gentle dark text */
+        font-family: "Inter", sans-serif;
+    }
+    body {
+        background: #ffffff;
+        background: #ffffff;
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(247, 237, 237, 1) 49%,
+            rgba(235, 232, 232, 1) 100%
+        );
+    }
+
+    @keyframes gradient-animation {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>

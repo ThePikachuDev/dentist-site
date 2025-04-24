@@ -1,0 +1,94 @@
+---
+const reviews = [
+    {
+        name: "Alice",
+        review: "Amazing service! I was so happy with the results. The team was super friendly and helpful.",
+    },
+    {
+        name: "Bob",
+        review: "Highly recommend this company. Professional and friendly. They really went the extra mile!",
+    },
+    {
+        name: "Charlie",
+        review: "Excellent work! Will definitely use their services again. Top-notch quality!",
+    },
+    {
+        name: "Diana",
+        review: "Fantastic experience! Couldn't be happier with the outcome. Will tell all my friends!",
+    },
+    {
+        name: "Ethan",
+        review: "Great value for money. The service was prompt and the results were exactly what I needed.",
+    },
+];
+---
+
+<div class="rounded-xl shadow-md mt-8">
+    <h2 class="text-4xl font-bold text-gray-800 mb-4 text-center">
+        What Our Awesome Clients Say
+    </h2>
+    <div class="h-[2px] w-92 bg-black mx-auto"></div>
+    <div class="overflow-x-auto scroll-smooth">
+        <div class="flex space-x-6 px-6 md:px-10 lg:px-16 py-4">
+            {
+                reviews.map((review) => (
+                    <div class="bg-white rounded-lg shadow-lg p-6 w-80 sm:w-96 flex-shrink-0">
+                        <div class="mb-4">
+                            <p class="text-gray-700 italic">
+                                "{review.review}"
+                            </p>
+                        </div>
+                        <h3 class="text-lg font-semibold text-indigo-600 text-right">
+                            - {review.name}
+                        </h3>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .scroll-smooth::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+    }
+
+    .scroll-smooth {
+        -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+    }
+</style>
+
+<script>
+    const reviewContainer = document.querySelector(".overflow-x-auto");
+
+    if (reviewContainer) {
+        let scrollAmount = 0;
+        const scrollSpeed = 0.9; // Adjust for faster/slower scrolling
+        const intervalTime = 40; // Adjust for smoother/choppier animation
+
+        function autoScroll() {
+            scrollAmount += scrollSpeed;
+            reviewContainer.scrollLeft = scrollAmount;
+
+            // Loop back to the start when we reach the end (with a little buffer)
+            if (
+                scrollAmount >
+                reviewContainer.scrollWidth - reviewContainer.clientWidth - 50
+            ) {
+                scrollAmount = 0;
+            }
+        }
+
+        let scrollInterval = setInterval(autoScroll, intervalTime);
+
+        // Optional: Pause on hover for better user experience
+        reviewContainer.addEventListener("mouseenter", () => {
+            clearInterval(scrollInterval);
+        });
+
+        reviewContainer.addEventListener("mouseleave", () => {
+            scrollInterval = setInterval(autoScroll, intervalTime);
+        });
+    }
+</script>

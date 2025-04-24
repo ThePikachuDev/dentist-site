@@ -1,0 +1,194 @@
+---
+
+---
+
+<nav
+    class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-full px-8 py-3 w-[90%] max-w-6xl flex items-center justify-between z-50"
+>
+    <a href="/" class="items-center space-x-2">
+        <img src="/favicon.webp" alt="Logo" class="h-10 w-10 rounded-full" />
+    </a>
+
+    <div
+        class="menuIcon z-50 cursor-pointer relative justify-center items-center w-8 h-0 hidden max-sm:flex flex-col gap-1"
+    >
+        <span class="line absolute one w-8 h-[3px] bg-black rounded-2xl"></span>
+        <span class="line absolute two w-8 h-[3px] bg-black rounded-2xl"></span>
+        <span class="line absolute three w-8 h-[3px] bg-black rounded-2xl"
+        ></span>
+    </div>
+
+    <!-- Humburger Navbar Menu -->
+
+    <div
+        class="full-scr max-sm:block hidden fixed -top-4 right-[-100rem] h-screen w-screen bg-[#00000070]"
+    >
+    </div>
+
+    <ul
+        class="humburgerMenu max-sm:flex hidden transition-all ease-in-out top-[-2rem] right-[-100rem] bg-white w-[70vw] h-[250vw] flex-col items-center pt-20 fixed font-bold space-y-6 text-2xl text-gray-700"
+    >
+        <li class="mt-9">
+            <a href="#" class="">Home</a>
+        </li>
+        <li>
+            <a href="#" class="">About</a>
+        </li>
+        <li
+            class="serviceElem w-full transition-all mb-0 ease-in-out text-center relative"
+        >
+            <a
+                href="#"
+                class="flex items-center justify-center gap-2 w-full text-center"
+            >
+                <span class="text-center"> Services </span>
+                <span class="serviceElemIcon rotate-[270deg]"> &lt; </span>
+            </a>
+            <ul
+                data-elem
+                class="serviceDropDown h-0 w-0 overflow-hidden rounded text-xl font-bold py-3 text-center text-wrap bg-white px-2"
+            >
+                <li class="py-2">
+                    <a href="#">Cosmetic Dentist</a>
+                </li>
+                <li class="py-2">
+                    <a href="#"> Children(Pediatric) Dentist </a>
+                </li>
+
+                <li class="py-2">
+                    <a href="#"> Root Canal Specialist</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="">Contact Us</a>
+        </li>
+    </ul>
+
+    <!-- Desktop Navbar  -->
+
+    <ul class="hidden sm:flex space-x-6 text-gray-700 font-bold">
+        <li>
+            <a href="#" class="">Home</a>
+        </li>
+        <li>
+            <a href="#" class="">About</a>
+        </li>
+        <li class="relative hover:**:data-elem:block">
+            <a href="#" class="">Services</a>
+            <ul
+                data-elem
+                class="absolute overflow-hidden hidden group-hover:block hover:block font-bold
+                 pt-3 -left-4 text-left text-sm text-nowrap bg-[rgba(255, 255, 255, 0.1)] backdrop-blur-[10px] w-fit"
+            >
+                <li class="hover:backdrop-blur-2xl p-2">
+                    <a href="#">Cosmetic Dentist</a>
+                </li>
+                <li class="hover:backdrop-blur-2xl p-2">
+                    <a href="#"> Children(Pediatric) Dentist </a>
+                </li>
+                <li class="hover:backdrop-blur-2xl p-2">
+                    <a href="#"> Root Canal Specialist</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="">Contact Us</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    nav {
+        font-family: "Syncopate";
+        font-weight: 800;
+
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.1); /* light frosted effect */
+    }
+    .activeMenu .line {
+        background-color: rgb(191, 183, 183);
+    }
+
+    .activeMenu .line.one {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+    }
+
+    .activeMenu .line.three {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
+    }
+
+    .activeMenu .line.two {
+        opacity: 0;
+    }
+
+    .line {
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        border-radius: 9px;
+        background-color: black;
+        transition: all 0.4s linear;
+    }
+
+    .one {
+        top: 5.5px;
+    }
+
+    .three {
+        bottom: 6px;
+    }
+
+    .move-full-src {
+        right: -1rem;
+    }
+
+    .whFull {
+        background-color: #f4f2ed;
+
+        text-wrap: wrap;
+        width: 70vw;
+        margin: 0;
+        height: fit-content;
+        right: 0;
+    }
+</style>
+
+<script lang="js">
+    let serviceElemIcon = document.querySelector(".serviceElemIcon");
+    let serviceDropDown = document.querySelector(".serviceDropDown");
+    let serviceElem = document.querySelector(".serviceElem");
+    let menuIcon = document.querySelector(".menuIcon");
+    let humburgerMenu = document.querySelector(".humburgerMenu");
+    let fullScr = document.querySelector(".full-scr");
+
+    function toggleHumberMenu() {
+        menuIcon.classList.toggle("activeMenu");
+        fullScr.classList.toggle("move-full-src");
+        fullScr.classList.toggle("right-[-100rem]");
+
+        if (menuIcon.classList.contains("activeMenu")) {
+            humburgerMenu.style.right = "-5%";
+        } else {
+            humburgerMenu.style.right = "-100%";
+        }
+    }
+
+    menuIcon.addEventListener("click", function () {
+        toggleHumberMenu();
+    });
+
+    fullScr.addEventListener("click", () => {
+        toggleHumberMenu();
+    });
+
+    serviceElem.addEventListener("click", () => {
+        serviceDropDown.classList.toggle("whFull");
+        serviceElemIcon.classList.toggle("rotate-90");
+        serviceElemIcon.classList.toggle("rotate-[270deg]");
+    });
+</script>

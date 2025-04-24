@@ -1,0 +1,39 @@
+---
+// import background from "../assets/background.svg";
+---
+
+<div class="relative w-full h-screen overflow-hidden">
+    <div class="fixed top-0 left-0 w-full h-full z-[-1]"></div>
+
+    <div class="flex w-full h-screen lg:flex-row flex-col">
+        <!-- Left content section -->
+        <div class="lg:w-1/2 w-full h-full flex flex-col pt-24 lg:pl-14 px-6">
+            <h1
+                class="text-[clamp(2.5rem,5vw,3.75rem)] leading-tight font-medium lg:mr-8 sm:mr-0 max-sm:text-4xl max-sm:font-semibold"
+            >
+                Your smile, our passion, experience dentistry like never before!
+            </h1>
+            <div class="w-[150px] h-[2px] bg-black my-6"></div>
+            <p class="font-light text-xl mb-6">
+                Providing advanced dental solutions with a gentle touch. From
+                preventive care to implants, we ensure your best smile.
+            </p>
+            <button
+                class="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold text-lg shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl w-fit cursor-pointer"
+            >
+                Book Appointment
+            </button>
+        </div>
+
+        <div
+            class="lg:w-1/2 w-full h-full lg:h-screen p-2 max-lg:h-[50vh] max-sm:h-[40vh]"
+        >
+            <img
+                src="/hero.webp"
+                alt="Dental care showcase"
+                loading="eager"
+                class="w-full h-full object-cover rounded-lg"
+            />
+        </div>
+    </div>
+</div>

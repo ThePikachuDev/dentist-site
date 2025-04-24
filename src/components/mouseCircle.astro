@@ -1,0 +1,110 @@
+---
+// This is a purely static component that includes the HTML & loads the client JS
+---
+
+<div class="circle hidden md:block bg-black"></div>
+
+<script>
+    // import { defineAction } from "astro:actions";
+    // import { gsap } from "gsap";
+    //
+    // let timeout;
+
+    function moveCircle() {
+        window.addEventListener("DOMContentLoaded", () => {
+            const circle = document.querySelector(".circle");
+
+            if (!circle) return;
+            // let xScale = 1;
+            // let yScale = 1;
+            //
+            // // previous locations of mouse on x axis and y axis
+            // let xprev = 0;
+            // let yprev = 0;
+            //
+            window.addEventListener("mousemove", (details) => {
+                // clearTimeout(timeout);
+
+                // let xDiff = details.clientX - xprev;
+                // let yDiff = details.clientY - yprev;
+                //
+                // xScale = gsap.utils.clamp(0.7, 1.3, xDiff);
+                // yScale = gsap.utils.clamp(0.7, 1.3, yDiff);
+                //
+                // xprev = details.clientX;
+                // yprev = details.clientY;
+                //
+                // console.log(details.clientX, details.clientY);
+                const el = document.elementFromPoint(
+                    details.clientX,
+                    details.clientY,
+                );
+                const isPointer =
+                    el && getComputedStyle(el).cursor === "pointer";
+
+                // Position
+                circle.style.left = `${details.clientX}px`;
+                circle.style.top = `${details.clientY}px`;
+                // circle.style.transform = `scale(${xScale},${yScale})`;
+                //
+                // Grow effect
+                circle.classList.toggle("grow", isPointer);
+                //
+                // timeout = setTimeout(function () {
+                //     circle.style.transform = ` translate(${details.clientX},${details.clientY}) scale(1,1)`;
+                // }, 100);
+            });
+        });
+    }
+
+    moveCircle();
+    // function skewCircle() {
+    //     // Defautl Scale values
+    //     let xScale = 1;
+    //     let yScale = 1;
+    //
+    //     // previous locations of mouse on x axis and y axis
+    //     let xprev = 0;
+    //     let yprev = 0;
+    //
+    //     window.addEventListener("mousemove", function (details) {
+    //         let xDiff = details.clientX - xprev;
+    //         let yDiff = details.clientY - yprev;
+    //
+    //         xScale = gsap.utils.clamp(0.8, 1.3, xDiff);
+    //         yScale = gsap.utils.clamp(0.8, 1.3, yDiff);
+    //
+    //         xprev = details.clientX;
+    //         yprev = details.clientY;
+    //
+    //         moveCircle(xScale, yScale);
+    //
+    //         // console.log(xDiff, yDiff);
+    //     });
+    // }
+    //
+    // skewCircle();
+</script>
+
+<style>
+    .circle {
+        position: fixed;
+        width: 25px;
+        height: 25px;
+        background: #e0e0e0;
+        border-radius: 50%;
+        pointer-events: none;
+        mix-blend-mode: exclusion;
+        transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+    }
+    .circle.grow {
+        transform: translate(-50%, -50%) scale(2);
+        /* transform: scale(2); */
+    }
+
+    
+    
+</style>
+

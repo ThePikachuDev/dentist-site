@@ -1,0 +1,582 @@
+---
+// servicesGrid.astro - Optimized for performance, accessibility and responsive design
+import { Icon } from 'astro-icon';
+
+// Define icon paths
+const iconPaths = {
+  "toothbrush": "M12 2C9.24 2 7 4.24 7 7v10c0 2.76 2.24 5 5 5s5-2.24 5-5V7c0-2.76-2.24-5-5-5zm0 2c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3s-3-1.34-3-3V7c0-1.66 1.34-3 3-3z",
+  "search": "M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z",
+  "sparkle": "M12 2L9.4 8.6 2 9.2 7.4 14l-1.6 7 6.2-3.7 6.2 3.7-1.6-7 5.4-4.8-7.4-.6z",
+  "tooth-nerve": "M12 2a5 5 0 0 0-5 5v3H5a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3h-2V7a5 5 0 0 0-5-5zm0 2c1.66 0 3 1.34 3 3v7h2v-2h2a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h2v2h2V7c0-1.66 1.34-3 3-3z",
+  "tooth-implant": "M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z",
+  "braces": "M5 8h2v8H5zm12 0h2v8h-2zM8 5v14h8V5H8zm6 2v10h-4V7h4z",
+  "sparkles": "M19.5 10c.83 0 1.5-.67 1.5-1.5S20.33 7 19.5 7 18 7.67 18 8.5s.67 1.5 1.5 1.5zM17 6c.83 0 1.5-.67 1.5-1.5S17.83 3 17 3s-1.5.67-1.5 1.5S16.17 6 17 6zm-5-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm3.5 12.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5 1.5-.67 1.5-1.5zM12 13c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2zm4.5 2.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5z",
+  "warning": "M12 2L1 21h22L12 2zm0 5l7.5 11.5h-15L12 7z"
+};
+
+// Helper function to get icon path
+function getIconPath(iconName) {
+  return iconPaths[iconName] || iconPaths["toothbrush"];
+}
+
+const services = [
+  {
+    title: "Teeth Cleaning",
+    description: "Professional cleaning to remove plaque and tartar buildup, keeping your teeth healthy and bright for a lasting smile.",
+    icon: "toothbrush",
+    id: "service-cleaning"
+  },
+  {
+    title: "Dental Checkups",
+    description: "Comprehensive examinations to detect issues early and maintain optimal oral health. Regular checkups prevent serious concerns.",
+    icon: "search",
+    id: "service-checkups"
+  },
+  {
+    title: "Teeth Whitening",
+    description: "Advanced whitening procedures to restore your smile's natural brilliance and boost your confidence with professional results.",
+    icon: "sparkle",
+    id: "service-whitening"
+  },
+  {
+    title: "Root Canal Therapy",
+    description: "Pain-relieving procedure that saves teeth from extraction when infection reaches the nerve, preserving your natural tooth.",
+    icon: "tooth-nerve",
+    id: "service-rootcanal"
+  },
+  {
+    title: "Dental Implants",
+    description: "Permanent replacement for missing teeth that looks and functions like natural teeth, providing stability and confidence.",
+    icon: "tooth-implant",
+    id: "service-implants"
+  },
+  {
+    title: "Invisalign Treatment",
+    description: "Clear aligners that straighten teeth discreetly and comfortably without metal braces for the smile you've always wanted.",
+    icon: "braces",
+    id: "service-invisalign"
+  },
+  {
+    title: "Cosmetic Dentistry",
+    description: "Aesthetic procedures to enhance your smile including veneers, bonding, and reshaping tailored to your unique dental profile.",
+    icon: "sparkles",
+    id: "service-cosmetic"
+  },
+  {
+    title: "Emergency Dentistry",
+    description: "Prompt care for dental emergencies, including toothaches and broken teeth, with same-day appointments for urgent situations.",
+    icon: "warning",
+    id: "service-emergency"
+  }
+];
+---
+
+<section class="services-section py-16 xl:py-24 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+  <div class="text-center mb-16">
+    <h2 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Our Services</h2>
+    <p class="text-xl text-gray-700 max-w-3xl mx-auto">Comprehensive dental care with a gentle touch. Explore our range of services designed for your perfect smile.</p>
+  </div>
+
+  <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
+    {services.map((service, index) => (
+      <div 
+        id={service.id}
+        class="service-card relative bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-sm transition-all duration-300 cursor-pointer overflow-hidden"
+        data-index={index}
+        tabindex="0"
+        role="button"
+        aria-label={`Learn more about ${service.title}`}
+      >
+        <div class="card-content relative z-10">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-4">
+            <div class="icon-wrapper h-12 w-12 flex items-center justify-center rounded-full bg-black text-white">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={getIconPath(service.icon)}></path>
+              </svg>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold">{service.title}</h3>
+          </div>
+          <p class="text-base sm:text-lg text-gray-700 mb-4">{service.description}</p>
+          <div class="flex items-center text-black font-medium mt-2">
+            <span>Learn more</span>
+            <svg class="w-5 h-5 ml-2 arrow-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="card-backdrop absolute inset-0 opacity-0 pointer-events-none"></div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  /**
+   * High-performance Services Grid
+   * Optimized for memory usage and responsiveness
+   */
+  document.addEventListener('DOMContentLoaded', () => {
+    const serviceCards = document.querySelectorAll('.service-card');
+    const servicesGrid = document.getElementById('services-grid');
+    let isMobile = window.innerWidth < 768;
+    
+    // Debounce function to limit execution frequency
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+    
+    // Check device capabilities
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    // Stagger animation on initial load with IntersectionObserver for better performance
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -10% 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Use requestAnimationFrame for smoother animations
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              entry.target.classList.add('card-visible');
+            }, i * 100);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    serviceCards.forEach(card => {
+      observer.observe(card);
+    });
+    
+    // Initialize card interactions if animations are not reduced
+    if (!prefersReducedMotion) {
+      initializeCardInteractions();
+    }
+    
+    // Handle resize events efficiently
+    window.addEventListener('resize', debounce(() => {
+      const wasDesktop = !isMobile;
+      isMobile = window.innerWidth < 768;
+      
+      // Re-initialize if switching between mobile and desktop
+      if (wasDesktop !== !isMobile) {
+        resetCards();
+        if (!prefersReducedMotion) {
+          initializeCardInteractions();
+        }
+      }
+    }, 250));
+    
+    function initializeCardInteractions() {
+      if (isMobile) {
+        initializeMobileInteractions();
+      } else {
+        initializeDesktopInteractions();
+      }
+    }
+    
+    function initializeDesktopInteractions() {
+      if (!servicesGrid) return;
+      
+      // Mouse move effect for desktop
+      servicesGrid.addEventListener('mousemove', handleMouseMove);
+      
+      // Click effects
+      serviceCards.forEach(card => {
+        card.addEventListener('click', handleCardClick);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleCardClick.call(card, e);
+          }
+        });
+      });
+    }
+    
+    function initializeMobileInteractions() {
+      // Simpler interactions for mobile
+      serviceCards.forEach(card => {
+        card.addEventListener('click', handleCardClick);
+        card.addEventListener('touchstart', function() {
+          this.classList.add('touch-active');
+        }, { passive: true });
+        card.addEventListener('touchend', function() {
+          this.classList.remove('touch-active');
+        }, { passive: true });
+      });
+    }
+    
+    function handleMouseMove(e) {
+      requestAnimationFrame(() => {
+        serviceCards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const isHovering = x > 0 && x < rect.width && y > 0 && y < rect.height;
+          
+          if (isHovering) {
+            // Calculate normalized coordinates (-1 to 1)
+            const xNorm = (x / rect.width) * 2 - 1;
+            const yNorm = (y / rect.height) * 2 - 1;
+            
+            // Apply subtle transform
+            const tiltAmount = 4; // Max tilt in degrees
+            card.style.transform = `perspective(1000px) rotateX(${-yNorm * tiltAmount}deg) rotateY(${xNorm * tiltAmount}deg) translateZ(10px)`;
+            
+            // Update backdrop lighting
+            const backdrop = card.querySelector('.card-backdrop');
+            if (backdrop) {
+              backdrop.style.opacity = '1';
+              backdrop.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 50%)`;
+            }
+            
+            // Highlight effect on icon
+            const icon = card.querySelector('.icon-wrapper');
+            if (icon) {
+              icon.style.transform = `translateY(-5px)`;
+            }
+          } else {
+            // Smooth reset
+            card.style.transform = '';
+            
+            const backdrop = card.querySelector('.card-backdrop');
+            if (backdrop) {
+              backdrop.style.opacity = '0';
+            }
+            
+            const icon = card.querySelector('.icon-wrapper');
+            if (icon) {
+              icon.style.transform = '';
+            }
+          }
+        });
+      });
+    }
+    
+    function handleCardClick(e) {
+      // Add ripple effect on click
+      const card = this;
+      const rect = card.getBoundingClientRect();
+      
+      // Create ripple element
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      card.appendChild(ripple);
+      
+      // Position the ripple
+      const size = Math.max(rect.width, rect.height) * 2;
+      ripple.style.width = ripple.style.height = `${size}px`;
+      
+      // Get click coordinates relative to card
+      const x = e.type.includes('touch') ? 
+                e.touches[0].clientX - rect.left : 
+                e.clientX - rect.left;
+      const y = e.type.includes('touch') ? 
+                e.touches[0].clientY - rect.top : 
+                e.clientY - rect.top;
+      
+      ripple.style.left = `${x - size/2}px`;
+      ripple.style.top = `${y - size/2}px`;
+      
+      // Add active class
+      ripple.classList.add('active');
+      
+      // Remove ripple after animation completes
+      setTimeout(() => {
+        ripple.remove();
+      }, 500);
+      
+      // Button press effect
+      card.classList.add('card-active');
+      setTimeout(() => {
+        card.classList.remove('card-active');
+      }, 200);
+    }
+    
+    function resetCards() {
+      serviceCards.forEach(card => {
+        card.style.transform = '';
+        card.classList.remove('touch-active', 'card-active');
+        
+        const backdrop = card.querySelector('.card-backdrop');
+        if (backdrop) {
+          backdrop.style.opacity = '0';
+          backdrop.style.background = '';
+        }
+        
+        const icon = card.querySelector('.icon-wrapper');
+        if (icon) {
+          icon.style.transform = '';
+        }
+      });
+      
+      if (!isMobile) {
+        servicesGrid.removeEventListener('mousemove', handleMouseMove);
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Base Card Styles */
+  .service-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .service-card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Hover and Focus States */
+  .service-card:hover, 
+  .service-card:focus {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+  
+  .service-card:focus-visible {
+    outline: 2px solid black;
+    outline-offset: 2px;
+  }
+  
+  /* Icon Animation */
+  .icon-wrapper {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .service-card:hover .icon-wrapper {
+    transform: translateY(-5px);
+  }
+  
+  /* Arrow Animation */
+  .arrow-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .service-card:hover .arrow-icon,
+  .service-card:focus .arrow-icon {
+    transform: translateX(5px);
+  }
+  
+  /* Card Interaction States */
+  .card-active {
+    transform: scale(0.98);
+  }
+  
+  .touch-active {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  
+  /* Ripple Effect */
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(0);
+    animation: ripple 0.5s linear;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  @keyframes ripple {
+    to {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+  
+  /* Card Backdrop */
+  .card-backdrop {
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 640px) {
+    .service-card {
+      padding: 1.25rem;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .service-card, .icon-wrapper, .arrow-icon, .card-backdrop, .ripple {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+
+
+<!-- <style> -->
+<!--     body { -->
+<!--         /* background: #fff; */ -->
+<!--     } -->
+<!---->
+<!--     .gridElem { -->
+<!--         display: grid; -->
+<!--         grid-template-columns: repeat(auto-fill, 10px); -->
+<!--         width: 100%; -->
+<!--         height: 100%; -->
+<!--         box-shadow: -->
+<!--             0 8px 16px rgba(0, 0, 0, 0.1), -->
+<!--             0 4px 6px rgba(0, 0, 0, 0.06); -->
+<!--     } -->
+<!---->
+<!--     #gridTwo { -->
+<!--         display: grid; -->
+<!--         grid-template-columns: repeat(auto-fill, 10px); -->
+<!--         width: 100%; -->
+<!--         height: 100%; -->
+<!--     } -->
+<!--     .pixel { -->
+<!--         width: 9px; -->
+<!--         height: 9px; -->
+<!--         /* border: 0.01px solid #000; */ -->
+<!--         background-color: transparent; -->
+<!---->
+<!--         transition: all ease 0.5s; -->
+<!--     } -->
+<!---->
+<!--     .glow { -->
+<!--         transition: all ease 2s; -->
+<!--         background-color: black; -->
+<!--     } -->
+<!-- </style> -->
+<!---->
+<!-- <div class="flex h-full w-full mt-[6vw] flex-col items-center justify-center"> -->
+<!--     <h1 class="text-4xl mb-5 font-bold">Our Services</h1> -->
+<!--     <div -->
+<!--         class="grid h-full w-full gap-5 p-2 px-5 grid-cols-4 grid-rows-4 shadow-md" -->
+<!--     > -->
+<!--         <div -->
+<!--             class="col-span-2 row-span-3 bg-gray-50 shadow-md flex items-center justify-center" -->
+<!--         > -->
+<!--             <div class="gridElem"> -->
+<!--                 <div class="p-4"> -->
+<!--                     <h1 class="text-2xl">Orthodontics</h1> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
+<!---->
+<!--         <div -->
+<!--             class="col-span-2 row-span-2 bg-lime-200 rounded-lg shadow-md flex items-center justify-center" -->
+<!--         > -->
+<!--             <div class="gridOne gridElem"></div> -->
+<!--         </div> -->
+<!---->
+<!--         <div -->
+<!--             class="col-span-2 row-span-3 bg-yellow-200 rounded-lg shadow-md flex items-center justify-center" -->
+<!--         > -->
+<!--             <div class="gridTwo gridElem"></div> -->
+<!--         </div> -->
+<!---->
+<!--         <div -->
+<!--             class="col-span-2 row-span-2 bg-amber-100 rounded-lg shadow-md flex items-center justify-center" -->
+<!--         > -->
+<!--             <div class="gridThree gridElem"></div> -->
+<!--         </div> -->
+<!--     </div> -->
+<!-- </div> -->
+<!---->
+<!-- <script> -->
+<!--     function gridGen(grid) { -->
+<!--         const pixelSize = 10; -->
+<!--         const cols = Math.floor( -->
+<!--             grid?.getBoundingClientRect().width / pixelSize, -->
+<!--         ); -->
+<!--         const rows = Math.floor( -->
+<!--             grid?.getBoundingClientRect().height / pixelSize, -->
+<!--         ); -->
+<!--         const totalPixels = cols * rows; -->
+<!---->
+<!--         const pixels = []; -->
+<!--         const radius = 7; -->
+<!---->
+<!--         for (let r = 0; r < rows; r++) { -->
+<!--             pixels[r] = []; -->
+<!--             for (let c = 0; c < cols; c++) { -->
+<!--                 const pixel = document.createElement("div"); -->
+<!--                 pixel.classList.add("pixel"); -->
+<!--                 pixel.style.transition = "all ease .5s"; -->
+<!--                 pixel.style.width = "9px"; -->
+<!--                 pixel.style.height = "9px"; -->
+<!--                 grid.appendChild(pixel); -->
+<!--                 pixels[r][c] = pixel; -->
+<!---->
+<!--                 pixel.dataset.row = r; -->
+<!--                 pixel.dataset.col = c; -->
+<!---->
+<!--                 pixel.addEventListener("mouseenter", () => { -->
+<!--                     highlightSurrounding(r, c); -->
+<!--                 }); -->
+<!---->
+<!--                 pixel.addEventListener("mouseleave", () => { -->
+<!--                     clearHighlight(r, c); -->
+<!--                 }); -->
+<!--             } -->
+<!--         } -->
+<!--         function highlightSurrounding(row, col) { -->
+<!--             for (let dr = -radius; dr <= radius; dr++) { -->
+<!--                 for (let dc = -radius; dc <= radius; dc++) { -->
+<!--                     const nr = row + dr; -->
+<!--                     const nc = col + dc; -->
+<!---->
+<!--                     if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) { -->
+<!--                         const distance = Math.abs(dr) + Math.abs(dc); -->
+<!--                         const maxDistance = radius; -->
+<!--                         const opacity = Math.max( -->
+<!--                             0, -->
+<!--                             1 - distance / (maxDistance + 1), -->
+<!--                         ); -->
+<!---->
+<!--                         if (opacity > 0) { -->
+<!--                             pixels[nr][nc].style.backgroundColor = -->
+<!--                                 `rgba(0, 0, 0, ${opacity})`; -->
+<!--                         } -->
+<!--                     } -->
+<!--                 } -->
+<!--             } -->
+<!--         } -->
+<!---->
+<!--         function clearHighlight(row, col) { -->
+<!--             for (let dr = -radius; dr <= radius; dr++) { -->
+<!--                 for (let dc = -radius; dc <= radius; dc++) { -->
+<!--                     const nr = row + dr; -->
+<!--                     const nc = col + dc; -->
+<!---->
+<!--                     if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) { -->
+<!--                         pixels[nr][nc].style.backgroundColor = `transparent`; -->
+<!--                     } -->
+<!--                 } -->
+<!--             } -->
+<!--         } -->
+<!--     } -->
+<!---->
+<!--     const grid = document.querySelector(".gridElem"); -->
+<!--     const grid1 = document.querySelector(".gridOne"); -->
+<!--     const grid2 = document.querySelector(".gridTwo"); -->
+<!--     const grid3 = document.querySelector(".gridThree"); -->
+<!--     gridGen(grid); -->
+<!--     gridGen(grid1); -->
+<!--     gridGen(grid2); -->
+<!--     gridGen(grid3); -->
+<!-- </script> -->
